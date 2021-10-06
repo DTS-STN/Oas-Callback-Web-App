@@ -1,5 +1,5 @@
 environments:
-    benrd: 
+    benrd:
     kylerd:
     adamrd:
     marcusrd:
@@ -10,21 +10,21 @@ environments:
     main:
     sprint:
     prod-blue:
-    prod-green: 
+    prod-green:
     prototype:
 
 releases:
 # virtualassistant
-  - name: virtualassistant-{{ .Environment.Name }}
+  - name: va-callback-{{ .Environment.Name }}
     chart: ../helm/charts/virtualassistant
     version: 0.0.1
     values:
       - overrides/virtualassistant.yaml.gotmpl
     labels:
         category: dts
-        app: virtualassistant
+        app: va-callback
         tier: server
-    namespace: virtualassistant-{{ .Environment.Name }}
+    namespace: va-callback-{{ .Environment.Name }}
     installed: true
     wait: false
     force: false
