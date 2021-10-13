@@ -1,14 +1,14 @@
 environments:
-  benrd: 
+  benrd:
   bingrd:
   dev:
   prod-blue:
-  prod-green: 
+  prod-green:
   prototype:
 
 releases:
 # virtualassistant
-  - name: va-callback-{{ .Environment.Name }}
+  - name: va-callback-{{ requiredEnv "BRANCH" }}
     chart: ../helm/charts/virtualassistant
     version: 0.0.1
     values:
@@ -17,7 +17,7 @@ releases:
         category: dts
         app: va-callback
         tier: server
-    namespace: va-callback-{{ .Environment.Name }}
+    namespace: va-callback-{{ requiredEnv "BRANCH" }}
     installed: true
     wait: false
     force: false

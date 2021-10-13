@@ -1,6 +1,6 @@
 image:
   repository: "{{ requiredEnv "ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}"
-  tag: "{{ requiredEnv "DOCKER_TAG" }}"
+  tag: "{{ requiredEnv "DOCKER_TAG" | default "latest" }}"
   pullPolicy: Always
 {{ if (eq .Environment.Name "prototype")}}
 replicaCount: 4
