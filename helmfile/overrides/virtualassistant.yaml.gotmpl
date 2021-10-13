@@ -1,8 +1,8 @@
 image:
   repository: "{{ requiredEnv "ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}"
-  tag: "{{ requiredEnv "DOCKER_TAG" }}" 
+  tag: "{{ requiredEnv "DOCKER_TAG" }}"
   pullPolicy: Always
-{{ if (eq .Environment.Name "prototype")}}  
+{{ if (eq .Environment.Name "prototype")}}
 replicaCount: 4
 {{ else }}
 replicaCount: 1
@@ -11,7 +11,11 @@ replicaCount: 1
 extraEnv:
   - name: NOTIFY_BASE_API_URL
     value: "https://api.notification.canada.ca"
-
+  - name: VITE_BotDirectLineSecrets
+    valueFrom:
+      secretKeyRef:
+        name: oas-unlock-api-az-credentials
+        key: bdm-dev-callback-frontend-BotDirectLineSecrets
 ingress:
       enabled: true
       hosts:
@@ -23,7 +27,7 @@ ingress:
       {{ else }}
           - {{ requiredEnv "PROJECT" }}-{{ .Environment.Name }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
           - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN_DEV" }}
-      {{ end }} 
+      {{ end }}
       annotations: {}
       # kubernetes.io/ingress.class: traefik
 
@@ -36,3 +40,29 @@ readinessDelay: 60
 livenessPath: /
 readinessPath: /
 port: 80
+secrets:
+   enabled: true
+   image: mtscontainers.azurecr.io/azurekvsidecar:regulated-test
+   env:
+      - name: KEYVAULT_READ_USER
+        value: {{ requiredEnv "KEYVAULT_READ_USER" }}
+      - name: KEYVAULT_READ_PASSWORD
+        value: {{ requiredEnv "KEYVAULT_READ_PASSWORD" }}
+      - name: SUBSCRIPTION_ID
+        value: {{ requiredEnv "SUBSCRIPTION_ID" }}
+      - name: TENANT_ID
+        value: {{ requiredEnv "TENANT_ID" }}
+      - name: KEYVAULT_NAME
+        value: {{ requiredEnv "KEYVAULT_NAME" }}
+      - name: K8S_CLUSTER_NAME
+        value: {{ requiredEnv "K8S_CLUSTER_NAME" }}
+      - name: K8S_RG_NAME
+        value: {{ requiredEnv "K8S_RG_NAME" }}
+      - name: NAMESPACE
+        value: {{ .Release.Namespace }}
+      - name: SINGLE_SECRET
+        value: "true"
+      - name: SINGLE_SECRET_NAME
+        value: oas-unlock-api-az-credentials
+      - name: SECRET_LIST
+        value: "bdm-dev-callback-frontend-BotDirectLineSecrets"
