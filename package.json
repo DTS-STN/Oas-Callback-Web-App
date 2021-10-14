@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "vite",
     "dev:host": "vite --host",
-    "build": "vite build",
+    "build": "vite build --base=./ --mode production",
     "serve": "vite preview",
     "lint": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,md,vue}\" \"__tests__/**/*.{js,jsx,ts,tsx,json,md,vue}\"",
     "lint:formatting": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json,md,vue}\" \"__tests__/**/*.{js,jsx,ts,tsx,json,md,vue}\"",

@@ -12,6 +12,7 @@ export default ({ mode }) => {
     vueI18n({
       include: path.resolve(__dirname, './src/locales/**'),
     })
-  ]
+  ],
+
 })
 }
