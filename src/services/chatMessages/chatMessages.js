@@ -12,6 +12,7 @@ const initConnection = (messageRecievedHandler, userName, lang) => {
       directLineMessageRecievedHandler = messageRecievedHandler;
     if (lang === "fr") lang = "fr-ca";
 
+    console.log("test, ", secrets);
     directLine = new DirectLine({
       secret: secrets,
       conversationStartProperties: {
