@@ -1,5 +1,5 @@
 import { DirectLine } from "botframework-directlinejs";
-import { BotDirectLineSecrets } from "../../app.config";
+const BotDirectLineSecrets = import.meta.env.VITE_BotDirectLineSecrets;
 /**
  * Initializes chat bot conversation.
  * @param messageRecievedHandler Overwrites the directLineMessageRecievedHandler function with parameters: userName and messagetext.
@@ -11,7 +11,7 @@ const initConnection = (messageRecievedHandler, userName, lang) => {
     if (messageRecievedHandler)
       directLineMessageRecievedHandler = messageRecievedHandler;
     if (lang === "fr") lang = "fr-ca";
-
+    // console.log("test,", BotDirectLineSecrets);
     directLine = new DirectLine({
       secret: "yiHz27_FE80.9vj25h3HqN29yZ6-bJUIdLA4Ok9FjhcG9w5C63VwmNE",
       conversationStartProperties: {

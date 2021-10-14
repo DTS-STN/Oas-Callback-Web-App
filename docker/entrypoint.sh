@@ -1,14 +1,14 @@
 #!/bin/sh
 
-ROOT_DIR=/usr/share/nginx/html
+ROOT_DIR=/app
 
 # Replace env vars in JavaScript files
 echo "Replacing env constants in JS"
-for file in $ROOT_DIR/js/app.*.js* $ROOT_DIR/index.html $ROOT_DIR/precache-manifest*.js;
+for file in $ROOT_DIR/assets/index.*.js* $ROOT_DIR/index.html ;
 do
   echo "Processing $file ...";
 
-  sed -i 's|VUE_APP_BotDirectLineSecrets|'${VITE_BotDirectLineSecrets}'|g' $file
+  sed -i 's|VITE_BotDirectLineSecrets|'${VITE_BotDirectLineSecrets}'|g' $file
 
 done
 
