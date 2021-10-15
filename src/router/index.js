@@ -60,5 +60,19 @@ router.beforeEach((to, from, next) => {
   const html = document.documentElement; // returns the html tag
   html.setAttribute("lang", language);
 
+  if (language === "fr") {
+    document
+      .getElementsByTagName("meta")
+      ["dcterms.title"].setAttribute("content", "L’assistant virtuel Modele");
+    document
+      .getElementsByTagName("meta")
+      ["dcterms.language"].setAttribute("content", "fra");
+    document
+      .getElementsByTagName("meta")
+      ["dcterms.creator"].setAttribute(
+        "content",
+        "Emploi et Développement social Canada"
+      );
+  }
   next();
 });
