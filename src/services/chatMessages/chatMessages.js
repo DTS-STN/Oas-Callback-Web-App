@@ -1,5 +1,4 @@
 import { DirectLine } from "botframework-directlinejs";
-const BotDirectLineSecrets = import.meta.env.VITE_BotDirectLineSecrets;
 /**
  * Initializes chat bot conversation.
  * @param messageRecievedHandler Overwrites the directLineMessageRecievedHandler function with parameters: userName and messagetext.
