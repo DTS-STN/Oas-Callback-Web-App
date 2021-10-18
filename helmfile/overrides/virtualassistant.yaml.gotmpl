@@ -1,5 +1,5 @@
 image:
-  repository: "{{ requiredEnv "ACR_DOMAIN" }}/{{ requiredEnv "PROJECT" }}"
+  repository: mtscontainers.azurecr.io/{{ requiredEnv "PROJECT" }}
   tag: "{{ requiredEnv "DOCKER_TAG" | default "latest" }}"
   pullPolicy: Always
 {{ if (eq .Environment.Name "prototype")}}
@@ -7,6 +7,11 @@ replicaCount: 4
 {{ else }}
 replicaCount: 1
 {{ end}}
+
+rbac:
+  enabled: true
+  teamId: {{ requiredEnv "RBAC_TEAM_ID" }}
+  clusterRoleName: fujitsu-devs
 
 extraEnv:
   - name: NOTIFY_BASE_API_URL
