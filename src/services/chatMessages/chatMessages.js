@@ -12,7 +12,7 @@ const initConnection = (messageRecievedHandler, userName, lang) => {
       directLineMessageRecievedHandler = messageRecievedHandler;
     if (lang === "fr") lang = "fr-ca";
     directLine = new DirectLine({
-      secret: "XZZoWUQ-zWo.7c1_UyimRyF9homvO7InkGRPQjKfmT9BDLFN-y3WgaI",
+      secret: "yiHz27_FE80.9vj25h3HqN29yZ6-bJUIdLA4Ok9FjhcG9w5C63VwmNE",
       conversationStartProperties: {
         locale: lang,
       },
