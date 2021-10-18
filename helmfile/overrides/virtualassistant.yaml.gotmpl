@@ -8,6 +8,11 @@ replicaCount: 4
 replicaCount: 1
 {{ end}}
 
+rbac:
+  enabled: true
+  teamId: {{ requiredEnv "RBAC_TEAM_ID" }}
+  clusterRoleName: fujitsu-devs
+
 extraEnv:
   - name: NOTIFY_BASE_API_URL
     value: "https://api.notification.canada.ca"
