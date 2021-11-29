@@ -9,10 +9,13 @@ replicaCount: 1
 {{ end}}
 
 rbac:
+{{- if or (eq .Environment.Name "prototype")}}
+  enabled: false
+{{ else }}
   enabled: true
   teamId: {{ requiredEnv "RBAC_TEAM_ID" }}
   clusterRoleName: fujitsu-devs
-
+{{ end }}
 extraEnv:
   - name: NOTIFY_BASE_API_URL
     value: "https://api.notification.canada.ca"
