@@ -19,11 +19,7 @@ rbac:
 extraEnv:
   - name: NOTIFY_BASE_API_URL
     value: "https://api.notification.canada.ca"
-  - name: VITE_BotDirectLineSecrets
-    valueFrom:
-      secretKeyRef:
-        name: oas-unlock-api-az-credentials
-        key: bdm-dev-callback-frontend-BotDirectLineSecrets
+
 ingress:
       enabled: true
       hosts:
