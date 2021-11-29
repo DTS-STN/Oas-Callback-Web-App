@@ -57,5 +57,4 @@ tolerations: []
 
 affinity: {}
 
-secret:
-  VITE_BotDirectLineSecrets:
+
