@@ -57,4 +57,5 @@ tolerations: []
 
 affinity: {}
 
-
+secrets:
+  enabled: false
