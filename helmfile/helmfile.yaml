@@ -18,7 +18,7 @@ releases:
         category: dts
         app: va-callback
         tier: server
-    namespace: va-callback-{{ requiredEnv "BRANCH"  }}
+    namespace: va-callback-FE-{{ requiredEnv "BRANCH"  }}
     installed: true
     wait: false
     force: false
