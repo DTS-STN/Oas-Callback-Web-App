@@ -1,8 +1,7 @@
 {
   "exclude": ["node_modules", "dist"],
   "compilerOptions": {
-
     "types": ["vite/client", "@types/jest", "cypress"],
-
   },
+  "envDir": "./"
 }
