@@ -18,7 +18,7 @@ releases:
         category: dts
         app: va-callback
         tier: server
-    namespace: va-callback
+    namespace: virtual-assistant
     installed: true
     wait: false
     force: false
