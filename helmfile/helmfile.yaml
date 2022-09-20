@@ -9,7 +9,7 @@ environments:
 
 releases:
 # virtualassistant
-  - name: va-callback-{{ requiredEnv "BRANCH" }}
+  - name: va-callback-{{ .Environment.Name }}
     chart: ../helm/charts/virtualassistant
     version: 0.0.1
     values:
@@ -18,7 +18,7 @@ releases:
         category: dts
         app: va-callback
         tier: server
-    namespace: va-callback-{{ requiredEnv "BRANCH"  }}
+    namespace: va-callback
     installed: true
     wait: false
     force: false

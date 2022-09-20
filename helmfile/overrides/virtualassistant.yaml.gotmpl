@@ -9,27 +9,28 @@ replicaCount: 1
 {{ end}}
 
 rbac:
-{{- if or (eq .Environment.Name "prototype")}}
-  enabled: false
-{{ else }}
   enabled: true
-  teamId: {{ requiredEnv "RBAC_TEAM_ID" }}
-  clusterRoleName: fujitsu-devs
-{{ end }}
+  azureAdGroupId: {{ requiredEnv "AZURE_AD_GROUP_ID" }} 
+  
 extraEnv:
   - name: NOTIFY_BASE_API_URL
     value: "https://api.notification.canada.ca"
 
 ingress:
-      enabled: true
-      hosts:
-      {{- if or (eq .Environment.Name "prod-blue") (eq .Environment.Name "prod-green") (eq .Environment.Name "prototype")}}
+    enabled: true
+    annotations: 
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+      appgw.ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.class: azure/application-gateway
+    tls:
+      - hosts:
           - {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
-      {{ else }}
-          - {{ requiredEnv "PROJECT" }}-{{ requiredEnv "BRANCH" }}.{{ requiredEnv "BASE_DOMAIN" }}
-      {{ end }}
-      annotations: {}
-      # kubernetes.io/ingress.class: traefik
+        secretName: ingress-tls-{{ .Release.Name }}
+    hosts:
+    - host: {{ requiredEnv "PROJECT" }}.{{ requiredEnv "BASE_DOMAIN" }}
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
 
 resources:
   requests:
